@@ -11,33 +11,34 @@ public class ViewCalculator {
     }
 
     public void run() {
+        int realPart = promptInt("Введите действительную часть 1-ого числа: ");
+        int imaginaryPart = promptInt("Введите мнимую часть 1-ого числа: ");
+        Calculable calculator = calculableFactory.create(realPart, imaginaryPart);
         while (true) {
-            int primaryArg = promptInt("Введите первый аргумент: ");
-            Calculable calculator = calculableFactory.create(primaryArg);
             while (true) {
-                String cmd = prompt("Введите команду (*, +, =) : ");
+                String cmd = prompt("Введите команду (*, +) : ");
                 if (cmd.equals("*")) {
-                    int arg = promptInt("Введите второй аргумент: ");
-                    calculator.multi(arg);
-                    continue;
+                    int realPart2 = promptInt("Введите действительную часть следующего числа: ");
+                    int imaginaryPart2 = promptInt("Введите мнимую часть следующего числа: ");
+                    calculator.multi(realPart2, imaginaryPart2);
+                    break;
                 }
                 if (cmd.equals("+")) {
-                    int arg = promptInt("Введите второй аргумент: ");
-                    calculator.sum(arg);
-                    continue;
-                }
-                if (cmd.equals("=")) {
-                    int result = calculator.getResult();
-                    System.out.printf("Результат %d\n", result);
+                    int realPart2 = promptInt("Введите действительную часть следующего числа: ");
+                    int imaginaryPart2 = promptInt("Введите мнимую часть следующего числа: ");
+                    calculator.sum(realPart2, imaginaryPart2);
                     break;
                 }
             }
+            String result = calculator.getResult();
+            System.out.printf("Результат %s\n", result);
             String cmd = prompt("Еще посчитать (Y/N)?");
             if (cmd.equals("Y")) {
                 continue;
             }
             break;
         }
+
     }
 
     private String prompt(String message) {

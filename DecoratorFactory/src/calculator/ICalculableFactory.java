@@ -1,5 +1,6 @@
 package calculator;
 
 public interface ICalculableFactory {
-    Calculable create(int primaryArg);
+    Calculable create(int realPart, int imaginaryPart);
+
 }
